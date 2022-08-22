@@ -1,5 +1,7 @@
 <script setup>
 import ItemCard from "./ItemCard.vue";
+import { useStore } from "@/stores/itemData";
+import { storeToRefs } from "pinia";
 </script>
 
 <template>
@@ -12,7 +14,10 @@ import ItemCard from "./ItemCard.vue";
         <img data-cy="card-prop-body" :src="image" alt="" />
       </template>
       <template v-slot:footer="slotProps">
-        <p data-cy="card-prop-footer">{{ slotProps.footer }}</p>
+        <p data-cy="card-prop-footer1">Peacekeeper: ${{ slotProps.pkPrice }}</p>
+        <p data-cy="card-prop-footer2">
+          Flea: ₽{{ slotProps.fleaPrice.toLocaleString("en-US") }}
+        </p>
       </template>
     </ItemCard>
   </div>
@@ -21,14 +26,17 @@ import ItemCard from "./ItemCard.vue";
 <style scoped>
 .card-wrapper {
   height: auto;
-  width: 100%;
+  width: 60rem;
+  border: solid white;
   display: flex;
+  flex-direction: row;
   justify-content: space-evenly;
+  flex-wrap: wrap;
   margin-top: 5rem;
 }
 img {
-  width: 250px;
-  height: 250px;
+  width: 40px;
+  height: 40px;
   align-self: center;
 }
 </style>
