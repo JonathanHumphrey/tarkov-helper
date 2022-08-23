@@ -4,7 +4,6 @@ import { useStore } from "@/stores/itemData";
 import { storeToRefs } from "pinia";
 
 const { items } = storeToRefs(useStore());
-const { baselineValues } = storeToRefs(useStore());
 </script>
 
 <template>
