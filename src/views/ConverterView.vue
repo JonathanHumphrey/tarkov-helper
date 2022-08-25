@@ -1,11 +1,15 @@
 <script setup>
 import CardGallery from "../components/CardGallery.vue";
+import ConverterTool from "../components/ConverterTool.vue"
 import { useStore } from "@/stores/itemData";
 const { getItemData } = useStore();
 </script>
 
 <template>
   <div class="converter">
+    <h2>Ruble to Dollar</h2>
+    <p>This tool will grab the information items that Peacekeeper will purchase. If the number is green, then you'll get a few extra dollars for the regular conversion price.</p>
+    <ConverterTool />
     <button @click="getItemData()">grab</button>
     <CardGallery />
   </div>
@@ -16,7 +20,8 @@ const { getItemData } = useStore();
   margin: auto;
   display: flex;
   justify-content: space-between;
-  flex-direction: row;
+  align-items: center;
+  flex-direction: column;
   border: solid white;
   width: 100%;
   min-height: 100vh;
