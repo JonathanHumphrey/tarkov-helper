@@ -25,14 +25,13 @@ import { storeToRefs } from "pinia";
 
 <style scoped>
 .card-wrapper {
-  height: auto;
   width: 60rem;
-  border: solid white;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   flex-wrap: wrap;
   margin-top: 5rem;
+  min-height: 100vh;
 }
 img {
   width: 40px;

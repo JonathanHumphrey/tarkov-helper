@@ -20,8 +20,11 @@ const convertDollahs = () => {
     <div class="conversion-tool">
         <label for="desired-dollar">
             Enter Desired Dollar Amount
-             <input type="number" name="desired-dollar" id="dollah-bills" v-on:input="convertDollahs()" min="1">
-            <p> ₽{{data.cost * 96}}</p>
+            <input data-cy="dollar" type="number" name="desired-dollar" id="dollah-bills" v-on:input="convertDollahs()" min="1">
+            <div>
+                <p>₽</p>
+                <p data-cy="converted" value="{{data.cost * 96}}">{{data.cost * 96}}</p>
+            </div>
         </label>
     </div>
 </template>
@@ -30,19 +33,17 @@ const convertDollahs = () => {
 .conversion-tool{
     display: flex;
     flex-direction: column;
-    border: solid white;
+    margin-top: 2rem;
+    color: rgb(219, 192, 69);
 } 
 input{
     line-height: 2rem;
     border-radius: 1rem;
     padding: .5rem;
     border: none;
-
 }
-span{
-    z-index: -1;
-    position: absolute;
-    left: 50rem;
-    
+p{
+    color: beige;
+    display: inline;
 }
 </style>

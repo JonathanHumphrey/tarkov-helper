@@ -2,7 +2,10 @@
 import CardGallery from "../components/CardGallery.vue";
 import ConverterTool from "../components/ConverterTool.vue"
 import { useStore } from "@/stores/itemData";
+import { storeToRefs } from "pinia";
+
 const { getItemData } = useStore();
+const { items } = storeToRefs(useStore());
 </script>
 
 <template>
@@ -10,7 +13,7 @@ const { getItemData } = useStore();
     <h2>Ruble to Dollar</h2>
     <p>This tool will grab the information items that Peacekeeper will purchase. If the number is green, then you'll get a few extra dollars for the regular conversion price.</p>
     <ConverterTool />
-    <button @click="getItemData()">grab</button>
+    <button @click="getItemData()" data-cy="grab" v-if="items.length === 0">grab data</button>
     <CardGallery />
   </div>
 </template>
@@ -19,12 +22,12 @@ const { getItemData } = useStore();
 .converter {
   margin: auto;
   display: flex;
-  justify-content: space-between;
+  justify-content:center;
   align-items: center;
   flex-direction: column;
-  border: solid white;
   width: 100%;
   min-height: 100vh;
+  color: rgb(219, 192, 69);
 }
 button{   
   background: none;
@@ -40,5 +43,11 @@ button{
 button:hover{
   background: rgb(255, 249, 241);
 
+}
+h2{
+  margin-top: 0;
+}
+p{
+  margin: 0;
 }
 </style>

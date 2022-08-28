@@ -6,9 +6,9 @@ import { RouterLink, RouterView } from "vue-router";
   <div class="wrapper">
     <div class="nav-bar">
       <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/ruble-dollar-conversion">Ruble to Dollar Tool</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
+        <RouterLink to="/" data-cy="home">Home</RouterLink>
+        <RouterLink to="/ruble-dollar-conversion" data-cy="ruble">Ruble to Dollar Tool</RouterLink>
+        <RouterLink to="/about" data-cy="about">About</RouterLink>
       </nav>
     </div>
   </div>
@@ -34,16 +34,40 @@ html{
 .nav-bar {
   margin: auto;
   margin-top: 2rem;
+  width: 60%;
+  display: flex;
+  justify-content: space-evenly;
+}
+a{
+  color: rgb(211, 211, 211);
+  text-decoration: none;
+  text-shadow: -1px 0 black, 0 2px black, 2px 0 black, 0 -1px black;
+  margin-right: 2rem;
+  margin-left: 2rem;
 }
 
-nav{
-  border-radius: .5rem;
-}
 nav a.router-link-exact-active {
-  background-color: rgb(255, 249, 241);
+   background-color: rgb(211, 211, 211);  
+  color: white;
+  border: none;
+  width: 10rem;
+  font-size: 1.5rem;
+  text-decoration: none;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  border-radius: .5rem;
+  cursor: pointer;
 }
 
 nav :hover {
-  background-color: rgb(255, 249, 241);
+  background-color: white;
+  color: white;
+  border: none;
+  width: 10rem;
+  font-size: 1.5rem;
+  text-decoration: none;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  border-radius: .5rem;
+  cursor: pointer;
 }
+
 </style>
