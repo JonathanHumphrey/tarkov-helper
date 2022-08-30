@@ -14,6 +14,29 @@ export const useStore = defineStore({
 	}),
 	getters: {},
 	actions: {
+		async ammoData(){
+			await fetch('https://api.tarkov.dev/graphql', {
+				method: 'POST',
+				headers: {
+				  'Content-Type': 'application/json',
+				  'Accept': 'application/json',
+				},
+				body: JSON.stringify({query: `{
+					ammo {
+						item{
+						  shortName
+						}
+						caliber
+						penetrationPower
+						penetrationChance
+						armorDamage
+						damage
+					  }
+			  }`})
+			  })
+				.then(r => r.json())
+				.then(data => console.log('data returned:', data));
+		},
 		async getItemData() {
 			await fetch("https://api.tarkov.dev/graphql", {
 				method: "POST",

@@ -23,7 +23,7 @@ const convertDollahs = () => {
             <input data-cy="dollar" type="number" name="desired-dollar" id="dollah-bills" v-on:input="convertDollahs()" min="1">
             <div>
                 <p>₽</p>
-                <p data-cy="converted" value="{{data.cost * 96}}">{{data.cost * 96}}</p>
+                <p data-cy="converted">{{data.cost * 96}}</p>
             </div>
         </label>
     </div>

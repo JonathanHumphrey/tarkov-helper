@@ -1,6 +1,19 @@
+<script setup>
+import { useStore } from "@/stores/itemData";
+import { storeToRefs } from "pinia";
+
+const { ammoData } = useStore();
+
+const ammoGrab = () => {
+  console.log('we here')
+  ammoData();
+}
+</script>
+
 <template>
   <div class="about">
     <h1>This is an about page</h1>
+    <button @click="ammoGrab()"></button>
   </div>
 </template>
 
