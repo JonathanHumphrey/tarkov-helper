@@ -3,6 +3,12 @@ import { defineStore } from "pinia";
 export const useStore = defineStore({
 	id: "data",
 	state: () => ({
+		ammo: {
+			'762x54': [],
+			'762x39': [],
+			'556x45': [],
+			'545x39': []
+		},
 		items: [],
 		baselineValues: {
 			"SSD drive": 34994,
@@ -35,7 +41,30 @@ export const useStore = defineStore({
 			  }`})
 			  })
 				.then(r => r.json())
-				.then(data => console.log('data returned:', data));
+				.then((data) => {
+					//console.log(data.data.ammo)
+					for(let i = 0; i < 157; i++){
+						//console.log(data.data.ammo[i])
+						if(data.data.ammo[i].caliber === "Caliber556x45NATO"){
+							console.log(data.data.ammo[i].caliber)
+							this.ammo['556x45'].push(data.data.ammo[i])
+						}
+						else if(data.data.ammo[i].caliber === "Caliber762x54R"){
+							console.log(data.data.ammo[i].caliber)
+							this.ammo['762x54'].push(data.data.ammo[i])
+						}
+						else if(data.data.ammo[i].caliber === "Caliber762x39"){
+							console.log(data.data.ammo[i].caliber)
+							this.ammo['762x39'].push(data.data.ammo[i])
+						}
+						else if(data.data.ammo[i].caliber === "Caliber545x39"){
+							console.log(data.data.ammo[i].caliber)
+							this.ammo['545x39'].push(data.data.ammo[i])
+						}
+						
+					}
+					console.log(this.ammo)
+				})
 		},
 		async getItemData() {
 			await fetch("https://api.tarkov.dev/graphql", {
