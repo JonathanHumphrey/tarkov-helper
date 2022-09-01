@@ -8,7 +8,7 @@ import { RouterLink, RouterView } from "vue-router";
       <nav>
         <RouterLink to="/" data-cy="home">Home</RouterLink>
         <RouterLink to="/ruble-dollar-conversion" data-cy="ruble">Ruble to Dollar Tool</RouterLink>
-        <RouterLink to="/about" data-cy="about">About</RouterLink>
+        <RouterLink to="/ammo-guide" data-cy="ammo">Ammo Guide</RouterLink>
       </nav>
     </div>
   </div>

@@ -21,6 +21,7 @@ export const useStore = defineStore({
 	getters: {},
 	actions: {
 		async ammoData(){
+			console.log("Fetching Ammo...")
 			await fetch('https://api.tarkov.dev/graphql', {
 				method: 'POST',
 				headers: {
@@ -67,6 +68,7 @@ export const useStore = defineStore({
 				})
 		},
 		async getItemData() {
+			console.log("Fetching Items...")
 			await fetch("https://api.tarkov.dev/graphql", {
 				method: "POST",
 				headers: {
