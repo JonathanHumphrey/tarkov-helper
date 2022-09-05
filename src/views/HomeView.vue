@@ -9,8 +9,17 @@ const { ammoData } = useStore();
 const {items} = storeToRefs(useStore())
 
 const grabAllData = () =>{
-  getItemData()
-  ammoData()
+  try {
+    getItemData()
+  } catch (error) {
+    console.log("Error: ", error)
+  }
+  
+  try {
+    ammoData()
+  } catch (error) {
+    console.log("Error: ", error)
+  }
 }
 </script>
 

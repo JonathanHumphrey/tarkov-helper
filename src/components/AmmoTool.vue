@@ -1,34 +1,24 @@
 <script setup>
+// Component Imports
+import FilterBy from "@/components/FilterBy.vue"
+// Vue / Pinia Imports
 import { useStore } from "@/stores/itemData";
 import { storeToRefs } from "pinia";
 import {reactive} from 'vue'
 
-
 const { ammo } = storeToRefs(useStore());
+const { selecedList } = storeToRefs(useStore())
 
 const data = reactive({
-    selectedCaliber: '762x39'
+    filteredList: []
 })
-
-
-const ammoSelection = () =>{
-    let selection = document.getElementById("caliber");
-    data.selectedCaliber = selection.value;
-}
 </script>
 
 <template>
     <div>
-        <button @click="ammoGrab()"></button>
         <h2>Ammo Information</h2>
         <p></p>
-        <select id="caliber" @change="ammoSelection()">
-            <option value="" selected disabled>Select Caliber</option>
-            <option value="762x39">7.62x39</option>
-            <option value="762x54">7.62x54R</option>
-            <option value="556x45">5.56x45</option>
-            <option value="545x39">5.45x39</option>
-        </select>
+        <FilterBy />
         <div class="data" v-for="ammoType in ammo[data.selectedCaliber]">
             <h2>{{ammoType.item.shortName}}</h2>
             <div class="pen">

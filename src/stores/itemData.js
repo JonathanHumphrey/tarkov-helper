@@ -17,8 +17,14 @@ export const useStore = defineStore({
 			"Slim diary": 31008,
 			"SAS drive": 40128,
 		},
+		selectedCaliber: []
 	}),
-	getters: {},
+	getters: {
+		getCaliber(caliber){
+			this.selectedCaliber = caliber;
+			console.log(this.selectedCaliber)
+		}
+	},
 	actions: {
 		async ammoData(){
 			console.log("Fetching Ammo...")
@@ -47,24 +53,23 @@ export const useStore = defineStore({
 					for(let i = 0; i < 157; i++){
 						//console.log(data.data.ammo[i])
 						if(data.data.ammo[i].caliber === "Caliber556x45NATO"){
-							console.log(data.data.ammo[i].caliber)
 							this.ammo['556x45'].push(data.data.ammo[i])
 						}
 						else if(data.data.ammo[i].caliber === "Caliber762x54R"){
-							console.log(data.data.ammo[i].caliber)
 							this.ammo['762x54'].push(data.data.ammo[i])
 						}
 						else if(data.data.ammo[i].caliber === "Caliber762x39"){
-							console.log(data.data.ammo[i].caliber)
 							this.ammo['762x39'].push(data.data.ammo[i])
 						}
 						else if(data.data.ammo[i].caliber === "Caliber545x39"){
-							console.log(data.data.ammo[i].caliber)
 							this.ammo['545x39'].push(data.data.ammo[i])
 						}
 						
 					}
-					console.log(this.ammo)
+					for(let item in this.ammo){
+						console.log(item)
+					}
+					console.log("Ammo complete")
 				})
 		},
 		async getItemData() {
@@ -101,7 +106,6 @@ export const useStore = defineStore({
 					if (this.items.length === 0) {
 						this.items.push(blob);
 					}
-					console.log(this.items);
 				});
 
 			await fetch("https://api.tarkov.dev/graphql", {
@@ -134,7 +138,6 @@ export const useStore = defineStore({
 						base: 63264,
 					};
 					this.items.push(blob);
-					console.log(this.items);
 				});
 			await fetch("https://api.tarkov.dev/graphql", {
 				method: "POST",
@@ -166,7 +169,6 @@ export const useStore = defineStore({
 						base: 25334,
 					};
 					this.items.push(blob);
-					console.log(this.items);
 				});
 			await fetch("https://api.tarkov.dev/graphql", {
 				method: "POST",
@@ -198,7 +200,6 @@ export const useStore = defineStore({
 						base: 31008,
 					};
 					this.items.push(blob);
-					console.log(this.items);
 				});
 			await fetch("https://api.tarkov.dev/graphql", {
 				method: "POST",
@@ -231,9 +232,7 @@ export const useStore = defineStore({
 					};
 
 					this.items.push(blob);
-
-					console.log(this.items);
-				});
+ 				});
 		},
 	},
 });
