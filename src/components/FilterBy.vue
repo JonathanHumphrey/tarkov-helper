@@ -5,10 +5,10 @@ import { storeToRefs } from "pinia";
 import {reactive} from 'vue'
 
 const { ammo } = storeToRefs(useStore());
-const { getCaliber } = useStore();
+const { testFunction } = useStore();
 
 let data = reactive({
-    selectedCaliber: '762x39',
+    selectedCaliber: akAssault,
     filterValue: 'none'
 })
 const ammoSelection = () => {
@@ -24,7 +24,7 @@ const getFilteredList = (event) => {
     let string = data.selectedCaliber;
     console.log(ammo.akRifle)
     let filteredList = ammo.akRifle;
-    console.log(filteredList)
+    testFunction()
 }
 </script>
 

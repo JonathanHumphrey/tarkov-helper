@@ -23,6 +23,9 @@ export const useStore = defineStore({
 		
 	},
 	actions: {
+		testFunction() {
+			console.log(this.ammo['76239'])
+		},
 		async ammoData(){
 			console.log("Fetching Ammo...")
 			await fetch('https://api.tarkov.dev/graphql', {
