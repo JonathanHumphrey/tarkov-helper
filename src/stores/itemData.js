@@ -4,10 +4,10 @@ export const useStore = defineStore({
 	id: "data",
 	state: () => ({
 		ammo: {
-			'762x54': [],
-			'762x39': [],
-			'556x45': [],
-			'545x39': []
+			akRifle: [],
+			akAssault: [],
+			akSubRifle: [],
+			arAssault: []
 		},
 		items: [],
 		baselineValues: {
@@ -20,10 +20,7 @@ export const useStore = defineStore({
 		selectedCaliber: []
 	}),
 	getters: {
-		getCaliber(caliber){
-			this.selectedCaliber = caliber;
-			console.log(this.selectedCaliber)
-		}
+		
 	},
 	actions: {
 		async ammoData(){
@@ -53,16 +50,16 @@ export const useStore = defineStore({
 					for(let i = 0; i < 157; i++){
 						//console.log(data.data.ammo[i])
 						if(data.data.ammo[i].caliber === "Caliber556x45NATO"){
-							this.ammo['556x45'].push(data.data.ammo[i])
+							this.ammo.arAssault.push(data.data.ammo[i])
 						}
 						else if(data.data.ammo[i].caliber === "Caliber762x54R"){
-							this.ammo['762x54'].push(data.data.ammo[i])
+							this.ammo.akRifle.push(data.data.ammo[i])
 						}
 						else if(data.data.ammo[i].caliber === "Caliber762x39"){
-							this.ammo['762x39'].push(data.data.ammo[i])
+							this.ammo.akAssault.push(data.data.ammo[i])
 						}
 						else if(data.data.ammo[i].caliber === "Caliber545x39"){
-							this.ammo['545x39'].push(data.data.ammo[i])
+							this.ammo.akSubRifle.push(data.data.ammo[i])
 						}
 						
 					}

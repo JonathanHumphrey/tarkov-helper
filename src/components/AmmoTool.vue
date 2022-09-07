@@ -7,7 +7,7 @@ import { storeToRefs } from "pinia";
 import {reactive} from 'vue'
 
 const { ammo } = storeToRefs(useStore());
-const { selecedList } = storeToRefs(useStore())
+const { selectedList } = storeToRefs(useStore())
 
 const data = reactive({
     filteredList: []
@@ -19,7 +19,7 @@ const data = reactive({
         <h2>Ammo Information</h2>
         <p></p>
         <FilterBy />
-        <div class="data" v-for="ammoType in ammo[data.selectedCaliber]">
+        <div class="data" v-for="ammoType in ammo['76239']">
             <h2>{{ammoType.item.shortName}}</h2>
             <div class="pen">
               <p>Penetration: {{ammoType.penetrationPower}}</p>

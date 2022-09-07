@@ -21,8 +21,10 @@ const filterList = (event) => {
     console.log(data.filterValue)
 }
 const getFilteredList = (event) => {
-    console.log(this.ammo['762x39'])
-    let filteredList = []
+    let string = data.selectedCaliber;
+    console.log(ammo.akRifle)
+    let filteredList = ammo.akRifle;
+    console.log(filteredList)
 }
 </script>
 
@@ -30,10 +32,10 @@ const getFilteredList = (event) => {
     <div class="filter-wrapper">
         <select id="caliber" @change="ammoSelection()">
             <option value="" selected disabled>Select Caliber</option>
-            <option value="762x39">7.62x39</option>
-            <option value="762x54">7.62x54R</option>
-            <option value="556x45">5.56x45</option>
-            <option value="545x39">5.45x39</option>
+            <option value="76239">7.62x39</option>
+            <option value="76254">7.62x54R</option>
+            <option value="55645">5.56x45</option>
+            <option value="54539">5.45x39</option>
         </select>
         <label for="filter">Sort By:
             <select 
