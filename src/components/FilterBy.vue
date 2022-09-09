@@ -2,57 +2,68 @@
 // Vue / Pinia Imports
 import { useStore } from "@/stores/itemData";
 import { storeToRefs } from "pinia";
-import {reactive} from 'vue'
+import { reactive } from "vue";
 
 const { ammo } = storeToRefs(useStore());
-const { testFunction } = useStore();
+const { saveSorted } = useStore();
 
 let data = reactive({
-    selectedCaliber: akAssault,
-    filterValue: 'none'
-})
+  selectedCaliber: "akAssault",
+  filterValue: "none",
+});
 const ammoSelection = () => {
-    let selection = document.getElementById("caliber");
-    data.selectedCaliber = selection.value
-    console.log(data.selectedCaliber)
-}
+  let selection = document.getElementById("caliber");
+  data.selectedCaliber = selection.value;
+};
 const filterList = (event) => {
-    data.filterValue = event.target.value
-    console.log(data.filterValue)
-}
+  data.filterValue = event.target.value;
+};
 const getFilteredList = (event) => {
-    let string = data.selectedCaliber;
-    console.log(ammo.akRifle)
-    let filteredList = ammo.akRifle;
-    testFunction()
-}
+  let string = data.selectedCaliber;
+  let filteredList = [];
+  if (data.filterValue === "pen") {
+    filteredList = ammo.value[`${data.selectedCaliber}`].sort(
+      (a, b) => parseFloat(b.penetrationPower) - parseFloat(a.penetrationPower)
+    );
+  } else if (data.filterValue === "dam") {
+    filteredList = ammo.value[`${data.selectedCaliber}`].sort(
+      (a, b) => parseFloat(b.damage) - parseFloat(a.damage)
+    );
+  }
+  saveSorted(filteredList);
+};
 </script>
 
 <template>
-    <div class="filter-wrapper">
-        <select id="caliber" @change="ammoSelection()">
-            <option value="" selected disabled>Select Caliber</option>
-            <option value="76239">7.62x39</option>
-            <option value="76254">7.62x54R</option>
-            <option value="55645">5.56x45</option>
-            <option value="54539">5.45x39</option>
-        </select>
-        <label for="filter">Sort By:
-            <select 
-                name="filter" 
-                id="filter" 
-                class="filter-select"
-                @change="filterList($event)"
-            >
-                <option value="none" selected disabled hidden>Select</option>
-                <option value="pen">Penetration</option>
-                <option value="dam">Damage</option>
-            </select>
-        </label>
-        <button @click="getFilteredList($event)">Sort</button>
-    </div>
+  <div class="filter-wrapper">
+    <select id="caliber" @change="ammoSelection()">
+      <option value="" selected disabled>Select Caliber</option>
+      <option value="762x39">7.62x39</option>
+      <option value="762x54">7.62x54R</option>
+      <option value="556x45">5.56x45</option>
+      <option value="545x39">5.45x39</option>
+      <option value="9x19PARA">9x19 PARA</option>
+      <option value="12g">12g</option>
+      <option value="57x28">57x28</option>
+      <option value="46x30">46x30</option>
+      <option value="9x18PM">9x18PM</option>
+    </select>
+    <label for="filter"
+      >Sort By:
+      <select
+        name="filter"
+        id="filter"
+        class="filter-select"
+        @change="filterList($event)"
+      >
+        <option value="none" selected disabled hidden>Select</option>
+        <option value="pen">Penetration</option>
+        <option value="dam">Damage</option>
+      </select>
+    </label>
+    <button @click="getFilteredList($event)">Sort</button>
+  </div>
 </template>
 
 <style scoped>
-
 </style>

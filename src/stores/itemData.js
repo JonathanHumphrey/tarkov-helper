@@ -4,10 +4,15 @@ export const useStore = defineStore({
 	id: "data",
 	state: () => ({
 		ammo: {
-			akRifle: [],
-			akAssault: [],
-			akSubRifle: [],
-			arAssault: []
+			"762x54": [],
+			"762x39": [],
+			"545x39": [],
+			"556x45": [],
+			"9x19PARA": [],
+			"12g": [],
+			"57x28": [],
+			"46x30": [],
+			"9x18PM": [],
 		},
 		items: [],
 		baselineValues: {
@@ -17,24 +22,24 @@ export const useStore = defineStore({
 			"Slim diary": 31008,
 			"SAS drive": 40128,
 		},
-		selectedCaliber: []
+		selectedCaliber: [],
+		filteredList: [],
 	}),
-	getters: {
-		
-	},
+	getters: {},
 	actions: {
-		testFunction() {
-			console.log(this.ammo['76239'])
+		saveSorted(list) {
+			this.filteredList = list;
 		},
-		async ammoData(){
-			console.log("Fetching Ammo...")
-			await fetch('https://api.tarkov.dev/graphql', {
-				method: 'POST',
+		async ammoData() {
+			console.log("Fetching Ammo...");
+			await fetch("https://api.tarkov.dev/graphql", {
+				method: "POST",
 				headers: {
-				  'Content-Type': 'application/json',
-				  'Accept': 'application/json',
+					"Content-Type": "application/json",
+					Accept: "application/json",
 				},
-				body: JSON.stringify({query: `{
+				body: JSON.stringify({
+					query: `{
 					ammo {
 						item{
 						  shortName
@@ -45,35 +50,42 @@ export const useStore = defineStore({
 						armorDamage
 						damage
 					  }
-			  }`})
-			  })
-				.then(r => r.json())
+			  }`,
+				}),
+			})
+				.then((r) => r.json())
 				.then((data) => {
-					//console.log(data.data.ammo)
-					for(let i = 0; i < 157; i++){
+					console.log(data.data.ammo);
+					for (let i = 0; i < 157; i++) {
 						//console.log(data.data.ammo[i])
-						if(data.data.ammo[i].caliber === "Caliber556x45NATO"){
-							this.ammo.arAssault.push(data.data.ammo[i])
+						if (data.data.ammo[i].caliber === "Caliber556x45NATO") {
+							this.ammo["556x45"].push(data.data.ammo[i]);
+						} else if (data.data.ammo[i].caliber === "Caliber762x54R") {
+							this.ammo["762x54"].push(data.data.ammo[i]);
+						} else if (data.data.ammo[i].caliber === "Caliber762x39") {
+							this.ammo["762x39"].push(data.data.ammo[i]);
+						} else if (data.data.ammo[i].caliber === "Caliber545x39") {
+							this.ammo["545x39"].push(data.data.ammo[i]);
+						} else if (data.data.ammo[i].caliber === "Caliber9x19PARA") {
+							this.ammo["9x19PARA"].push(data.data.ammo[i]);
+						} else if (data.data.ammo[i].caliber === "Caliber12g") {
+							this.ammo["12g"].push(data.data.ammo[i]);
+						} else if (data.data.ammo[i].caliber === "Caliber57x28") {
+							this.ammo["57x28"].push(data.data.ammo[i]);
+						} else if (data.data.ammo[i].caliber === "Caliber46x30") {
+							this.ammo["46x30"].push(data.data.ammo[i]);
+						} else if (data.data.ammo[i].caliber === "Caliber9x18PM") {
+							this.ammo["9x18PM"].push(data.data.ammo[i]);
 						}
-						else if(data.data.ammo[i].caliber === "Caliber762x54R"){
-							this.ammo.akRifle.push(data.data.ammo[i])
-						}
-						else if(data.data.ammo[i].caliber === "Caliber762x39"){
-							this.ammo.akAssault.push(data.data.ammo[i])
-						}
-						else if(data.data.ammo[i].caliber === "Caliber545x39"){
-							this.ammo.akSubRifle.push(data.data.ammo[i])
-						}
-						
 					}
-					for(let item in this.ammo){
-						console.log(item)
+					for (let item in this.ammo) {
+						console.log(item);
 					}
-					console.log("Ammo complete")
-				})
+					console.log("Ammo complete");
+				});
 		},
 		async getItemData() {
-			console.log("Fetching Items...")
+			console.log("Fetching Items...");
 			await fetch("https://api.tarkov.dev/graphql", {
 				method: "POST",
 				headers: {
@@ -232,7 +244,7 @@ export const useStore = defineStore({
 					};
 
 					this.items.push(blob);
- 				});
+				});
 		},
 	},
 });
