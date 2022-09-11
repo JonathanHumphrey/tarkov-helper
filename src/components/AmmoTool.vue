@@ -18,6 +18,11 @@ const data = reactive({
     <h2>Ammo Information</h2>
     <p></p>
     <FilterBy />
+    <div class="header">
+      <h2>Type</h2>
+      <h3>Penetration</h3>
+      <h3>Damage</h3>
+    </div>
     <div
       class="data"
       v-for="ammoType in filteredList"
@@ -37,6 +42,11 @@ const data = reactive({
 </template>
 
 <style scoped>
+  .header{
+    display: flex;
+    justify-content: space-around;
+    border-bottom: 4px solid rgb(211, 211, 211);
+  }
 .data {
   display: flex;
   justify-content: space-around;
@@ -52,6 +62,10 @@ const data = reactive({
 h2 {
   width: 20rem;
   text-align: left;
+}
+h3{
+  text-align: left;
+  width: 8rem;
 }
 select {
   line-height: 2rem;

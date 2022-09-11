@@ -8,16 +8,20 @@ const { ammo } = storeToRefs(useStore());
 const { saveSorted } = useStore();
 
 let data = reactive({
-  selectedCaliber: "akAssault",
-  filterValue: "none",
+  selectedCaliber: "762x39",
+  filterValue: "pen",
 });
+
+// On change of the first select, grabs and updates a reactive variable containing the correct caliber 
 const ammoSelection = () => {
   let selection = document.getElementById("caliber");
   data.selectedCaliber = selection.value;
 };
+// On change of the second select, grabs the value which the list will be sorted by: Damage, or Penetration chance of the bullet
 const filterList = (event) => {
   data.filterValue = event.target.value;
 };
+// Combines the data from other functions and sorts the list from saved state and then updates the sorted list into state
 const getFilteredList = (event) => {
   let string = data.selectedCaliber;
   let filteredList = [];

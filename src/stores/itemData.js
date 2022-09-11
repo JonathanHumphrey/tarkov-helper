@@ -55,7 +55,18 @@ export const useStore = defineStore({
 			})
 				.then((r) => r.json())
 				.then((data) => {
-					console.log(data.data.ammo);
+
+					/* 
+						TODO:
+							-optimize this initial filtering of the data-set
+								issue: the odd formatting of the caliber string could pose an issue
+
+								-could prolly really easily solve this issue with some string manipulation and regex or something alike. 
+								- there could also be some more common or readable and consistent value in the graphQL api
+					*/
+
+					// Uncomment to add more supported calibers
+					//console.log(data.data.ammo);
 					for (let i = 0; i < 157; i++) {
 						//console.log(data.data.ammo[i])
 						if (data.data.ammo[i].caliber === "Caliber556x45NATO") {
@@ -78,9 +89,6 @@ export const useStore = defineStore({
 							this.ammo["9x18PM"].push(data.data.ammo[i]);
 						}
 					}
-					for (let item in this.ammo) {
-						console.log(item);
-					}
 					console.log("Ammo complete");
 				});
 		},
@@ -94,156 +102,32 @@ export const useStore = defineStore({
 				},
 				body: JSON.stringify({
 					query: `{
-            items(name: "SSD") {
-                name
-                sellFor{
-                  price
-                  source
-                }
-                link
-                iconLink
-                changeLast48hPercent
-            }
-        }`,
+					items(bsgCategoryId: "5448ecbe4bdc2d60728b4568") {
+						name
+						sellFor{
+						price
+						source
+						}
+						link
+						iconLink
+						changeLast48hPercent
+					}
+        	}`,
 				}),
 			})
 				.then((r) => r.json())
 				.then((data) => {
-					let blob = {
-						name: data.data.items[0].name,
-						iconLink: data.data.items[0].iconLink,
-						sellFor: data.data.items[0].sellFor,
-						base: 34994,
-					};
-					if (this.items.length === 0) {
+					console.log(data)
+					for(let item in data.data.items){
+						
+						let blob = {
+							name: data.data.items[item].name,
+							iconLink: data.data.items[item].iconLink,
+							sellFor: data.data.items[item].sellFor,
+							base: (data.data.items[item].sellFor[1].price * 96)
+						};
 						this.items.push(blob);
 					}
-				});
-
-			await fetch("https://api.tarkov.dev/graphql", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-					Accept: "application/json",
-				},
-				body: JSON.stringify({
-					query: `{
-                items(name: "SMT") {
-                    name
-                    sellFor{
-                      price
-                      source
-                    }
-                    link
-                    iconLink
-                    changeLast48hPercent
-                }
-            }`,
-				}),
-			})
-				.then((r) => r.json())
-				.then((data) => {
-					let blob = {
-						name: data.data.items[0].name,
-						iconLink: data.data.items[0].iconLink,
-						sellFor: data.data.items[0].sellFor,
-						base: 63264,
-					};
-					this.items.push(blob);
-				});
-			await fetch("https://api.tarkov.dev/graphql", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-					Accept: "application/json",
-				},
-				body: JSON.stringify({
-					query: `{
-                    items(name: "Diary") {
-                        name
-                        sellFor{
-                          price
-                          source
-                        }
-                        link
-                        iconLink
-                        changeLast48hPercent
-                    }
-                }`,
-				}),
-			})
-				.then((r) => r.json())
-				.then((data) => {
-					let blob = {
-						name: data.data.items[0].name,
-						iconLink: data.data.items[0].iconLink,
-						sellFor: data.data.items[0].sellFor,
-						base: 25334,
-					};
-					this.items.push(blob);
-				});
-			await fetch("https://api.tarkov.dev/graphql", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-					Accept: "application/json",
-				},
-				body: JSON.stringify({
-					query: `{
-                    items(name: "sdiary") {
-                        name
-                        sellFor{
-                          price
-                          source
-                        }
-                        link
-                        iconLink
-                        changeLast48hPercent
-                    }
-                }`,
-				}),
-			})
-				.then((r) => r.json())
-				.then((data) => {
-					let blob = {
-						name: data.data.items[0].name,
-						iconLink: data.data.items[0].iconLink,
-						sellFor: data.data.items[0].sellFor,
-						base: 31008,
-					};
-					this.items.push(blob);
-				});
-			await fetch("https://api.tarkov.dev/graphql", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-					Accept: "application/json",
-				},
-				body: JSON.stringify({
-					query: `{
-                items(name: "SAS") {
-                    name
-                    sellFor{
-                      price
-                      source
-                    }
-                    link
-                    iconLink
-                    changeLast48hPercent
-                }
-            }`,
-				}),
-			})
-				.then((r) => r.json())
-				.then((data) => {
-					let blob = {
-						name: data.data.items[0].name,
-						iconLink: data.data.items[0].iconLink,
-						sellFor: data.data.items[0].sellFor,
-						base: 40128,
-					};
-
-					this.items.push(blob);
 				});
 		},
 	},

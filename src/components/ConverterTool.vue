@@ -6,11 +6,9 @@ const data = reactive({
   cost: 0
 })
 
-
+// Updates the reactive cost in data
 const convertDollahs = () => {
-    console.log("dollas y'all")
     data.cost = document.getElementById("dollah-bills").value
-    console.log(data.cost)
 }
 
 

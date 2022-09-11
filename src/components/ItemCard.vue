@@ -4,6 +4,11 @@ import { useStore } from "@/stores/itemData";
 import { storeToRefs } from "pinia";
 
 const { items } = storeToRefs(useStore());
+
+/* 
+    TODO: need to figure out wtf 'base cost' was derived from I don't think
+    it was simply dollar value * 96
+*/
 </script>
 
 <template>
@@ -18,11 +23,11 @@ const { items } = storeToRefs(useStore());
       :fleaPrice="item.sellFor[2].price"
     ></slot>
     <div class="difference">
-      <p v-if="item.base > item.sellFor[2].price" class="green-text">
-        + {{ (item.base / item.sellFor[2].price).toFixed([2]) }} %
+      <p v-if="item.sellFor[1] * 96 > item.sellFor[2].price" class="green-text">
+        + {{ (item.sellFor[1].price * 96 / item.sellFor[2].price).toFixed([2]) }} %
       </p>
       <p v-else class="red-text">
-        - {{ (item.base / item.sellFor[2].price).toFixed([2]) }} %
+        - {{ (item.sellFor[1].price * 96 / item.sellFor[2].price).toFixed([2]) }} %
       </p>
     </div>
   </div>
