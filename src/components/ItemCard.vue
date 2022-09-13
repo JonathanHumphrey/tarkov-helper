@@ -23,11 +23,11 @@ const { items } = storeToRefs(useStore());
       :fleaPrice="item.sellFor[2].price"
     ></slot>
     <div class="difference">
-      <p v-if="item.sellFor[1] * 96 > item.sellFor[2].price" class="green-text">
-        + {{ (item.sellFor[1].price * 96 / item.sellFor[2].price).toFixed([2]) }} %
+      <p v-if="item.sellFor[2] * 112 > item.sellFor[1].price" class="green-text">
+        + {{ (item.sellFor[2].price * 112 / item.sellFor[1].price).toFixed([2]) }} %
       </p>
       <p v-else class="red-text">
-        - {{ (item.sellFor[1].price * 96 / item.sellFor[2].price).toFixed([2]) }} %
+        - {{ (item.sellFor[1].price * 112 / item.sellFor[2].price).toFixed([2]) }} %
       </p>
     </div>
   </div>

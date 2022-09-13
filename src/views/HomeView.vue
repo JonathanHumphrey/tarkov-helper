@@ -6,17 +6,22 @@ import { storeToRefs } from "pinia";
 // Store interactions
 const { getItemData } = useStore();
 const { ammoData } = useStore();
-const {items} = storeToRefs(useStore())
+const { items } = storeToRefs(useStore());
+const { ammo } = storeToRefs(useStore());
 
 const grabAllData = () =>{
   try {
-    getItemData()
+    if(items.length() === 0){
+      getItemData()
+    }
   } catch (error) {
     console.log("Error: ", error)
   }
   
   try {
-    ammoData()
+    if(ammo["762x54"].length() === 0){
+      ammoData()
+    }
   } catch (error) {
     console.log("Error: ", error)
   }
