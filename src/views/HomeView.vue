@@ -10,21 +10,9 @@ const { items } = storeToRefs(useStore());
 const { ammo } = storeToRefs(useStore());
 
 const grabAllData = () =>{
-  try {
-    if(items.length() === 0){
-      getItemData()
-    }
-  } catch (error) {
-    console.log("Error: ", error)
-  }
+  getItemData()
   
-  try {
-    if(ammo["762x54"].length() === 0){
-      ammoData()
-    }
-  } catch (error) {
-    console.log("Error: ", error)
-  }
+  ammoData()
 }
 </script>
 

@@ -17,7 +17,7 @@ const ammoSelection = () => {
   let selection = document.getElementById("caliber");
   data.selectedCaliber = selection.value;
 };
-// On change of the second select, grabs the value which the list will be sorted by: Damage, or Penetration chance of the bullet
+// On change of the second select, grabs the value which the list will be sorted by: Damage, or Penetration chance of the bullet~
 const filterList = (event) => {
   data.filterValue = event.target.value;
 };
@@ -40,18 +40,18 @@ const getFilteredList = (event) => {
 
 <template>
   <div class="filter-wrapper">
-    <select id="caliber" @change="ammoSelection()">
-      <option value="" selected disabled>Select Caliber</option>
-      <option value="762x39">7.62x39</option>
-      <option value="762x54">7.62x54R</option>
-      <option value="556x45">5.56x45</option>
-      <option value="545x39">5.45x39</option>
-      <option value="9x19PARA">9x19 PARA</option>
-      <option value="12g">12g</option>
-      <option value="57x28">57x28</option>
-      <option value="46x30">46x30</option>
-      <option value="9x18PM">9x18PM</option>
-    </select>
+    <div class="selects">
+      <select id="caliber" @change="ammoSelection()">
+        <option value="762x39" selected default>7.62x39</option>
+        <option value="762x54">7.62x54R</option>
+        <option value="556x45">5.56x45</option>
+        <option value="545x39">5.45x39</option>
+        <option value="9x19PARA">9x19 PARA</option>
+        <option value="12g">12g</option>
+        <option value="57x28">57x28</option>
+        <option value="46x30">46x30</option>
+        <option value="9x18PM">9x18PM</option>
+      </select>
     <label for="filter"
       >Sort By:
       <select
@@ -60,14 +60,31 @@ const getFilteredList = (event) => {
         class="filter-select"
         @change="filterList($event)"
       >
-        <option value="none" selected disabled hidden>Select</option>
-        <option value="pen">Penetration</option>
+        <option value="pen" selected default>Penetration</option>
         <option value="dam">Damage</option>
       </select>
     </label>
+    </div>
     <button @click="getFilteredList($event)">Sort</button>
   </div>
 </template>
 
 <style scoped>
+.filter-wrapper{
+  display: flex;
+  border: solid white;
+  width: 40rem;
+  margin: auto;
+  flex-direction: column;
+}
+button{
+  margin: auto;
+  margin-top: 2rem; 
+}
+select[caliber]{
+  border-radius: .5rem;
+  height: 1.5rem;
+  padding: 1rem;
+  border: none;
+}
 </style>
