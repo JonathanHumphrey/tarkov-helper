@@ -27,9 +27,12 @@ export const useStore = defineStore({
 	}),
 	getters: {},
 	actions: {
+		// Saves the sorted list into state
 		saveSorted(list) {
 			this.filteredList = list;
 		},
+
+		// Fetches the ammo varieties and sorts them based on caliber
 		async ammoData() {
 			console.log("Fetching Ammo...");
 			await fetch("https://api.tarkov.dev/graphql", {
