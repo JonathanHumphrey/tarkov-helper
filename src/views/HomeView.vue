@@ -6,12 +6,13 @@ import { storeToRefs } from "pinia";
 // Store interactions
 const { getItemData } = useStore();
 const { ammoData } = useStore();
+const { getHideoutInfo } = useStore();
 const { items } = storeToRefs(useStore());
 const { ammo } = storeToRefs(useStore());
 
 const grabAllData = () =>{
   getItemData()
-  
+  getHideoutInfo()
   ammoData()
 }
 </script>

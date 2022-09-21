@@ -24,6 +24,7 @@ export const useStore = defineStore({
 		},
 		selectedCaliber: [],
 		filteredList: [],
+		hideoutStations: [],
 	}),
 	getters: {},
 	actions: {
@@ -133,5 +134,49 @@ export const useStore = defineStore({
 					}
 				});
 		},
+		async getHideoutInfo(){
+			await fetch("https://api.tarkov.dev/graphql", {
+				method: "POST",
+				headers:{
+					"Content-Type": "application/json",
+					Accept: "application/json"
+				},
+				body: JSON.stringify({
+					query: `{
+						hideoutStations{
+							name
+							crafts{
+							  level
+							  requiredItems{
+								item{
+								  name
+								}
+								count
+								quantity
+							  }
+							  rewardItems{
+								item{
+								  name
+								}
+							  }
+							  
+							}
+						  }
+					}`,
+				}),
+			})
+			.then((r) => r.json())
+			.then((data) => {
+				
+				let stations = data.data.hideoutStations
+				for(let i = 0; i < data.data.hideoutStations.length; i++){
+					
+					if(stations[i].crafts.length !== 0){
+						this.hideoutStations.push(stations[i]);
+					}
+				}
+				console.log(this.hideoutStations)
+			})
+		}
 	},
 });
