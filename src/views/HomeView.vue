@@ -10,6 +10,7 @@ const { getHideoutInfo } = useStore();
 const { items } = storeToRefs(useStore());
 const { ammo } = storeToRefs(useStore());
 
+// Temp function, may put this onCreated in the future
 const grabAllData = () =>{
   getItemData()
   getHideoutInfo()

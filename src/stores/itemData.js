@@ -114,7 +114,6 @@ export const useStore = defineStore({
 						}
 						link
 						iconLink
-						changeLast48hPercent
 					}
         	}`,
 				}),
@@ -150,6 +149,12 @@ export const useStore = defineStore({
 							  requiredItems{
 								item{
 								  name
+								  buyFor{
+									price
+									vendor{
+									  name
+									}
+								  }
 								}
 								count
 								quantity
@@ -157,9 +162,14 @@ export const useStore = defineStore({
 							  rewardItems{
 								item{
 								  name
+								  sellFor{
+									price
+									vendor{
+									  name
+									}
+								  }
 								}
 							  }
-							  
 							}
 						  }
 					}`,
@@ -174,6 +184,7 @@ export const useStore = defineStore({
 					if(stations[i].crafts.length !== 0){
 						this.hideoutStations.push(stations[i]);
 					}
+					console.log(stations[i].name)
 				}
 				console.log(this.hideoutStations)
 			})
