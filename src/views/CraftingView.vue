@@ -13,7 +13,7 @@ import CraftingGallery from "../components/CraftingGallery.vue"
 
 <template >
     <div class="crafting">
-        <h1>poggers</h1>
+        Crafting
         <CraftingGallery />
     </div>
 </template>

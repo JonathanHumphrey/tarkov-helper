@@ -23,7 +23,7 @@ import { storeToRefs } from "pinia";
 
 <style scoped>
 .card-wrapper {
-  width: 60rem;
+  width: 100rem;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;

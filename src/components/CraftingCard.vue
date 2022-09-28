@@ -13,7 +13,7 @@
         <div class="crafts" v-for="craft in station.crafts">
             <slot name="body" :body="craft.rewardItems[0].item.name"></slot>
             <div class="reqItems" v-for="item in craft.requiredItems">
-                <slot name="reqItems" :object="item.name" :quantity="item.quantity"></slot>
+                <slot name="reqItems" :object="item.item.name" :quantity="item.quantity"></slot>
             </div>
         </div>
     </div>
@@ -31,5 +31,9 @@
 }
 .card:hover {
   box-shadow: 0 8px 16px 0 rgba(255, 255, 255, 0.2);
+}
+.reqItems{
+    display: flex;
+    justify-content: space-between;
 }
 </style>
